@@ -13,6 +13,8 @@ private let reuseIdentifier = "PhotoCell"
 class PhotosCollectionViewController: UICollectionViewController {
     var photos: [Photo] = []
     
+    var selectedPhoto: Photo!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         let api = InstagramAPI()
@@ -47,9 +49,6 @@ class PhotosCollectionViewController: UICollectionViewController {
 
     }
     
-    
-    
-    
     override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return photos.count
     }
@@ -65,13 +64,19 @@ class PhotosCollectionViewController: UICollectionViewController {
     }
     
     override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        
+        selectedPhoto = photos[indexPath.row] 
     }
     
     /* Completion handler for API call. DO NOT CHANGE */
     func didLoadPhotos(photos: [Photo]) {
         self.photos = photos
         self.collectionView!.reloadData()
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        let photoDetailViewController = segue.destinationViewController as! PhotoDetailViewController
+        photoDetailViewController.photo = selectedPhoto
+
     }
     
 }
