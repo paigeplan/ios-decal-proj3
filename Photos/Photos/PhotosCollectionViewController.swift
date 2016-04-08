@@ -8,12 +8,15 @@
 
 import UIKit
 
+private let reuseIdentifier = "PhotoCell"
+
 class PhotosCollectionViewController: UICollectionViewController {
     var photos: [Photo]!
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        
         let api = InstagramAPI()
         api.loadPhotos(didLoadPhotos)
         // FILL ME IN
@@ -27,6 +30,22 @@ class PhotosCollectionViewController: UICollectionViewController {
     /* Creates a session from a photo's url to download data to instantiate a UIImage. 
        It then sets this as the imageView's image. */
     func loadImageForCell(photo: Photo, imageView: UIImageView) {
+        
+    }
+    
+    override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 1
+    }
+    
+    override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+        let photoCell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseIdentifier, forIndexPath: indexPath) as! PhotoCollectionViewCell
+        
+        // Configure the cell
+        
+        return photoCell
+    }
+    
+    override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         
     }
     

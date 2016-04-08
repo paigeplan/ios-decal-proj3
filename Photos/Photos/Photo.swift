@@ -20,6 +20,22 @@ class Photo {
     init (data: NSDictionary) {
         // FILL ME IN
         // HINT: use nested .valueForKey() calls, and then cast using 'as! TYPE'
+    
+        // Getting and Setting the Image URL
+        let imageDictionary = data.objectForKey("images")! as! NSDictionary
+        let standardResolutionDictionary = imageDictionary.objectForKey("standard_resolution")! as! NSDictionary
+        let standardResolutionImageURL = standardResolutionDictionary.objectForKey("url") as! String
+        url = standardResolutionImageURL
+        
+        // Getting and Setting the Username
+        let captionDictionary = data.objectForKey("caption")! as! NSDictionary
+        username = captionDictionary.valueForKey("from")?.valueForKey("username") as! String
+        
+        // Getting and setting number of likes
+        likes = data.objectForKey("likes")!.objectForKey("count") as! Int
+    
+        
+        //print(data)
     }
 
 }
