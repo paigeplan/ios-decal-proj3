@@ -33,16 +33,16 @@ class InstagramAPI {
                 do {
                     let feedDictionary = try NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.MutableContainers) as! NSDictionary
                     // FILL ME IN, REMEMBER TO USE FORCED DOWNCASTING
-                    //print(feedDictionary)
-                    
-                    let dataDictionary = feedDictionary.objectForKey("data")![0] as! NSDictionary
-    
-                    
-                    let photo = Photo(data: dataDictionary)
-                
                 
                     
-                    photos.append(photo)
+                    let dataArray = feedDictionary.objectForKey("data")! as! NSArray
+                    for element in dataArray {
+                        let photoData = element as! NSDictionary
+                        let photo = Photo(data: photoData)
+                        photos.append(photo)
+                    }
+                    
+                    
                     
                     // DO NOT CHANGE BELOW
                     let priority = DISPATCH_QUEUE_PRIORITY_DEFAULT
@@ -54,6 +54,7 @@ class InstagramAPI {
                 } catch let error as NSError {
                     print("ERROR: \(error.localizedDescription)")
                 }
+                                
             }
         }
         task.resume()

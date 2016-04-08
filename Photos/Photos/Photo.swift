@@ -23,14 +23,15 @@ class Photo {
     
         // Getting and Setting the Image URL
         let imageDictionary = data.objectForKey("images")! as! NSDictionary
-        let standardResolutionDictionary = imageDictionary.objectForKey("standard_resolution")! as! NSDictionary
-        let standardResolutionImageURL = standardResolutionDictionary.objectForKey("url") as! String
-        url = standardResolutionImageURL
-        
+        let lowResolutionDictionary = imageDictionary.objectForKey("low_resolution")! as! NSDictionary
+        let lowResolutionImageURL = lowResolutionDictionary.objectForKey("url") as! String
+        url = lowResolutionImageURL
         // Getting and Setting the Username
-        let captionDictionary = data.objectForKey("caption")! as! NSDictionary
-        username = captionDictionary.valueForKey("from")?.valueForKey("username") as! String
         
+        print(data)
+        let userDictionary = data.objectForKey("user")! as! NSDictionary
+        username = userDictionary.valueForKey("username") as! String
+    
         // Getting and setting number of likes
         likes = data.objectForKey("likes")!.objectForKey("count") as! Int
     
