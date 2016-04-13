@@ -18,6 +18,8 @@ class PhotoDetailViewController: UIViewController {
     var liked = false
     
     var photo: Photo!
+    var image: UIImage!
+    
     
     let buttonLabelNormal = "♡"
     let buttonLabelLiked = "💛"
@@ -25,10 +27,20 @@ class PhotoDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        likesTextLabel.text = String(photo.likes) + " likes"
-//        
-//        usernameTextLabel.text = photo.username
+        likesTextLabel.text = String(photo.likes) + " likes"
         
+        usernameTextLabel.text = photo.username
+        
+        photoView.image = image
+        
+      
+        
+        let formatter = NSDateFormatter()
+        formatter.dateStyle = NSDateFormatterStyle.ShortStyle
+        formatter.timeStyle = .ShortStyle
+        
+        let dateString = formatter.stringFromDate(photo.date)
+        dateTextLabel.text = dateString
         
         // Do any additional setup after loading the view.
     }

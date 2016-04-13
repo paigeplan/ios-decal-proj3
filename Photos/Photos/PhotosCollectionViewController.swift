@@ -64,7 +64,8 @@ class PhotosCollectionViewController: UICollectionViewController {
     }
     
     override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        selectedPhoto = photos[indexPath.row] 
+        selectedPhoto = photos[indexPath.row]
+        
     }
     
     /* Completion handler for API call. DO NOT CHANGE */
@@ -76,6 +77,14 @@ class PhotosCollectionViewController: UICollectionViewController {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         let photoDetailViewController = segue.destinationViewController as! PhotoDetailViewController
         photoDetailViewController.photo = selectedPhoto
+        let selectedCell = sender as! PhotoCollectionViewCell
+        let indexPath = self.collectionView?.indexPathForCell(selectedCell)
+    
+        
+        photoDetailViewController.photo = photos[(indexPath?.row)!]
+        photoDetailViewController.image = selectedCell.photoImageView.image
+        
+        
 
     }
     
